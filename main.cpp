@@ -1,5 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <cstdio>
+#include <cstdlib>
+#include <fstream>
 
 #include "shape.h"
 #include "rect.h"
