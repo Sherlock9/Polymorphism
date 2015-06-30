@@ -18,8 +18,10 @@ void tampil_semua();
 void tampil_lingkaran();
 void tampil_persegi();
 void tampil_persegipanjang();
+void read_db();
 
 vector <Shape*> shape;
+vector <string> circle;
 
 int pilihan;
 
@@ -41,6 +43,7 @@ int main(){
 	cout<<c->area()<<endl;
 	cout<<c->circum()<<endl;*/
 	
+    read_db();
 	main_menu();
 	
 	return 0;
@@ -371,4 +374,57 @@ void tampil_persegipanjang(){
 			tampil_bentuk();
 			break;
 	}
+}
+
+void read_db()
+{
+    string shape_id;
+    string filename;
+    int jari;
+    int sisi;
+    int panjang;
+    int lebar;
+    
+    filename = "circle.txt";
+    ifstream circle_file(filename.c_str());
+    if (circle_file.is_open())
+    {
+        while (getline(circle_file, shape_id))
+        {
+            jari = atoi( shape_id.c_str() );
+            shape.push_back( new Circle(jari) ); 
+        }
+    }
+    else cout << "Unable to open file";
+    circle_file.close();
+    
+    filename = "square.txt";
+    ifstream square_file(filename.c_str());
+    if (square_file.is_open())
+    {
+        while (getline(square_file, shape_id))
+        {
+            sisi = atoi( shape_id.c_str() );
+            shape.push_back( new Square(sisi) ); 
+        }
+    }
+    else cout << "Unable to open file";
+    square_file.close();
+    
+    filename = "rectangle.txt";
+    ifstream rect_file(filename.c_str());
+    if (rect_file.is_open())
+    {
+        while (!rect_file.eof())
+        {
+            getline(rect_file,shape_id,'\t');
+            if (shape_id == "") { break; }
+            panjang = atoi( shape_id.c_str() );
+            getline(rect_file,shape_id,'\n');
+            lebar = atoi( shape_id.c_str() );
+            shape.push_back( new Rect(panjang, lebar) );
+        }
+    }
+    else cout << "Unable to open file";
+    rect_file.close();
 }
