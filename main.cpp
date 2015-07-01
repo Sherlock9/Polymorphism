@@ -19,9 +19,9 @@ void tampil_lingkaran();
 void tampil_persegi();
 void tampil_persegipanjang();
 void read_db();
+void write_db();
 
 vector <Shape*> shape;
-vector <string> circle;
 
 int pilihan;
 
@@ -77,6 +77,7 @@ void main_menu(){
 			hapus_bentuk();
 			break;
 		case 4:
+            write_db();
 			exit(0);
 			break;
 	}
@@ -427,4 +428,64 @@ void read_db()
     }
     else cout << "Unable to open file";
     rect_file.close();
+}
+
+void write_db()
+{
+    string filename;
+    string jenis;
+    ofstream db_file;
+    int sz = shape.size();
+    cout << "\nWRITE\n";
+    
+    filename = "circle.txt";
+    db_file.open(filename.c_str(),ios::out);
+    db_file.close();
+    filename = "square.txt";
+    db_file.open(filename.c_str(),ios::out);
+    db_file.close();
+    filename = "rectangle.txt";
+    db_file.open(filename.c_str(),ios::out);
+    db_file.close();
+    
+    for (int i = 0; i<sz; i++)
+    {
+        jenis = shape[i]->jenis_shape;
+        if ( jenis == "Lingkaran" ) 
+        {
+            filename = "circle.txt";
+            db_file.open(filename.c_str(), ios::out | ios::app);
+            if (db_file.is_open())
+            {
+                //cout << ((Circle *)shape[i])->jari << endl;
+                db_file << ((Circle *)shape[i])->jari << endl;
+            }
+            else cout << "Unable to open file";
+            db_file.close();
+        }
+        else if ( jenis == "Persegi" ) 
+        {
+            filename = "square.txt";
+            db_file.open(filename.c_str(), ios::out | ios::app);
+            if (db_file.is_open())
+            {
+                //cout << ((Square *)shape[i])->sisi << endl;
+                db_file << ((Square *)shape[i])->sisi << endl;
+            }
+            else cout << "Unable to open file";
+            db_file.close();
+        }
+        else if ( jenis == "Persegi Panjang" ) 
+        {
+            filename = "rectangle.txt";
+            db_file.open(filename.c_str(), ios::out | ios::app);
+            if (db_file.is_open())
+            {
+                //cout << ((Rect *)shape[i])->panjang << "\t" << ((Rect *)shape[i])->lebar << endl;
+                db_file << ((Rect *)shape[i])->panjang << "\t" << ((Rect *)shape[i])->lebar << endl;
+            }
+            else cout << "Unable to open file";
+            db_file.close();
+        }
+    }
 }
