@@ -10,7 +10,7 @@ float Rect::circum(){
 }
 
 void Rect::detail(){
-	cout<< jenis_shape;
+	cout<< jenis_shape<< endl;
 	cout<< "Panjang		: "<< panjang<< endl;
 	cout<< "Lebar		: "<< lebar<< endl;
 	cout<< "Luas		: "<< area()<< endl;

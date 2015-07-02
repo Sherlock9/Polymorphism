@@ -10,7 +10,7 @@ float Square::circum(){
 }
 
 void Square::detail(){
-	cout<< jenis_shape;
+	cout<< jenis_shape<< endl;
 	cout<< "Sisi		: "<< sisi<< endl;
 	cout<< "Luas		: "<< area()<< endl;
 	cout<< "Keliling	: "<< circum()<< endl<< endl;
